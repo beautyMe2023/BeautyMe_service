@@ -155,6 +155,7 @@
     <NavigationProperty Name="Appointment_can_give_treatment" Relationship="BeautyMeModel.FK__Appointme__Numbe__7EC1CEDB" FromRole="Appointment" ToRole="Appointment_can_give_treatment" />
     <NavigationProperty Name="Appointment_can_give_treatment1" Relationship="BeautyMeModel.FK__Appointme__Numbe__7FB5F314" FromRole="Appointment" ToRole="Appointment_can_give_treatment" />
     <NavigationProperty Name="Future_Appointment" Relationship="BeautyMeModel.FK__Future_Ap__Numbe__74444068" FromRole="Appointment" ToRole="Future_Appointment" />
+    <Property Name="Appointment_status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Appointment_can_give_treatment">
     <Key>

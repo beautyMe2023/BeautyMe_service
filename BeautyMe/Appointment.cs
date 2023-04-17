@@ -28,6 +28,7 @@ namespace BeautyMe
         public System.TimeSpan End_time { get; set; }
         public string Is_client_house { get; set; }
         public int Business_Number { get; set; }
+        public string Appointment_status { get; set; }
     
         public virtual Business Business { get; set; }
         public virtual Business Business1 { get; set; }

@@ -33,6 +33,29 @@ namespace BeautyMeWEB.Controllers
                 End_time = x.End_time,
                 Is_client_house = x.Is_client_house,
                 Business_Number = x.Business_Number,
+                Appointment_status = x.Appointment_status,
+            }).ToList();
+            if (AllAppointment != null)
+                return Request.CreateResponse(HttpStatusCode.OK, AllAppointment);
+            else
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+
+        // GET: Appointment
+        [HttpGet]
+        [Route("api/Appointment/AllAppointmentForBussines")]
+        public HttpResponseMessage GetAllAppointmentForBussines([FromBody] int Business_Numberr)
+        {
+            BeautyMeDBContext db = new BeautyMeDBContext();
+            List<AppointmentDTO> AllAppointment = db.Appointment.Where(a => a.Business_Number == Business_Numberr).Select(x => new AppointmentDTO
+            {
+                Number_appointment = x.Number_appointment,
+                Date = x.Date,
+                Start_time = x.Start_time,
+                End_time = x.End_time,
+                Is_client_house = x.Is_client_house,
+                Business_Number = x.Business_Number,
+                Appointment_status = x.Appointment_status,
             }).ToList();
             if (AllAppointment != null)
                 return Request.CreateResponse(HttpStatusCode.OK, AllAppointment);
@@ -57,6 +80,8 @@ namespace BeautyMeWEB.Controllers
                     End_time = x.End_time,
                     Is_client_house = x.Is_client_house,
                     Business_Number = x.Business_Number,
+                    Appointment_status = x.Appointment_status,
+
                 };
                 db.Appointment.Add(newAppointment);
                 db.SaveChanges();
@@ -89,6 +114,8 @@ namespace BeautyMeWEB.Controllers
                 AppointmentToUpdate.End_time = x.End_time;
                 AppointmentToUpdate.Is_client_house = x.Is_client_house;
                 AppointmentToUpdate.Business_Number = x.Business_Number;
+                AppointmentToUpdate.Appointment_status = x.Appointment_status;
+
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "The Appointment update in the dataBase");
             }
@@ -125,28 +152,3 @@ namespace BeautyMeWEB.Controllers
 
 
 
-//// Put: api/Put
-//[HttpPut]
-//[Route("api/Appointment/UpdateAppointment")]
-//public HttpResponseMessage PutUpdateAppointment([FromBody] AppointmentDTO x)
-//{
-//    BeautyMeDBContext db = new BeautyMeDBContext();
-//    Appointment AppointmentToUpdate = db.Appointment.FirstOrDefault(a => a.Number_appointment == x.Number_appointment);
-//    if (AppointmentToUpdate == null)
-//    {
-//        return Request.CreateResponse(HttpStatusCode.NotFound, $"Appointment with number {x.Number_appointment} not found.");
-//    }
-
-//    else
-//    {
-//        //AppointmentToUpdate.Number_appointment = x.Number_appointment;
-//        AppointmentToUpdate.Date = x.Date;
-//        AppointmentToUpdate.Start_time = x.Start_time;
-//        AppointmentToUpdate.End_time = x.End_time;
-//        AppointmentToUpdate.Is_client_house = x.Is_client_house;
-//        AppointmentToUpdate.Business_Number = x.Business_Number;
-//        db.Appointment.Add(AppointmentToUpdate);
-//        db.SaveChanges();
-//        return Request.CreateResponse(HttpStatusCode.OK, "The Appointment update in the dataBase");
-//    }
-//}

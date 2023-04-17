@@ -15,6 +15,7 @@
           <Property Name="End_time" Type="time" Precision="7" Nullable="false" />
           <Property Name="Is_client_house" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Business_Number" Type="int" Nullable="false" />
+          <Property Name="Appointment_status" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Appointment_can_give_treatment">
           <Key>
@@ -416,6 +417,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_delete_appointment">
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Future_Appointment" Type="Self.Future_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointment">
+              <PropertyRef Name="Number_appointment" />
+            </Principal>
+            <Dependent Role="Future_Appointment">
+              <PropertyRef Name="Number_appointment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -544,6 +559,10 @@
           <AssociationSet Name="FK__Treatment__Type___0A338187" Association="Self.FK__Treatment__Type___0A338187">
             <End Role="Type_Treatment" EntitySet="Type_Treatment" />
             <End Role="Treatment_of_category" EntitySet="Treatment_of_category" />
+          </AssociationSet>
+          <AssociationSet Name="fk_delete_appointment" Association="Self.fk_delete_appointment">
+            <End Role="Appointment" EntitySet="Appointment" />
+            <End Role="Future_Appointment" EntitySet="Future_Appointment" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -705,6 +724,7 @@
           <NavigationProperty Name="Appointment_can_give_treatment" Relationship="BeautyMeModel.FK__Appointme__Numbe__7EC1CEDB" FromRole="Appointment" ToRole="Appointment_can_give_treatment" />
           <NavigationProperty Name="Appointment_can_give_treatment1" Relationship="BeautyMeModel.FK__Appointme__Numbe__7FB5F314" FromRole="Appointment" ToRole="Appointment_can_give_treatment" />
           <NavigationProperty Name="Future_Appointment" Relationship="BeautyMeModel.FK__Future_Ap__Numbe__74444068" FromRole="Appointment" ToRole="Future_Appointment" />
+          <Property Name="Appointment_status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Appointment_can_give_treatment">
           <Key>
@@ -1176,6 +1196,7 @@
           <EntitySetMapping Name="Appointment">
             <EntityTypeMapping TypeName="BeautyMeModel.Appointment">
               <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="Appointment_status" ColumnName="Appointment_status" />
                 <ScalarProperty Name="Business_Number" ColumnName="Business_Number" />
                 <ScalarProperty Name="Is_client_house" ColumnName="Is_client_house" />
                 <ScalarProperty Name="End_time" ColumnName="End_time" />

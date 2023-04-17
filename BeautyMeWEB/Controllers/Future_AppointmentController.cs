@@ -2,7 +2,9 @@
 using BeautyMeWEB.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -42,6 +44,29 @@ namespace BeautyMeWEB.Controllers
         }
 
 
+        // GET: Future_Appointment
+        [HttpGet]
+        [Route("api/Future_Appointment/AllFuture_AppointmentForClient")]
+        public HttpResponseMessage GetAllFuture_AppointmentForClient([FromBody] string Client_ID_numberr)
+        {
+            BeautyMeDBContext db = new BeautyMeDBContext();
+            List<Future_AppointmentDTO> AllFuture_Appointment = db.Future_Appointment.Where(a => a.Client_ID_number == Client_ID_numberr).Select(x => new Future_AppointmentDTO
+            {
+                Future_appointment_number = x.Future_appointment_number,
+                AddressStreet = x.AddressStreet,
+                AddressHouseNumber = x.AddressHouseNumber,
+                AddressCity = x.AddressCity,
+                Appointment_status = x.Appointment_status,
+                Client_ID_number = x.Client_ID_number,
+                Type_treatment_Number = x.Type_treatment_Number,
+                Number_appointment = x.Number_appointment
+            }).ToList();
+            if (AllFuture_Appointment != null)
+                return Request.CreateResponse(HttpStatusCode.OK, AllFuture_Appointment);
+            else
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+
 
 
         // Post: api/Post
@@ -52,20 +77,37 @@ namespace BeautyMeWEB.Controllers
             try
             {
                 BeautyMeDBContext db = new BeautyMeDBContext();
-                Future_Appointment newFuture_Appointment = new Future_Appointment()
+                Appointment theScheduledAppointment = db.Appointment.Find(x.Number_appointment);
+                if (theScheduledAppointment != null)
                 {
-                    //Future_appointment_number = x.Future_appointment_number,
-                    AddressStreet = x.AddressStreet,
-                    AddressHouseNumber = x.AddressHouseNumber,
-                    AddressCity = x.AddressCity,
-                    Appointment_status = x.Appointment_status,
-                    Client_ID_number = x.Client_ID_number,
-                    Type_treatment_Number = x.Type_treatment_Number,
-                    Number_appointment = x.Number_appointment
-                };
-                db.Future_Appointment.Add(newFuture_Appointment);
-                db.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK, "new Future_Appointment added to the dataBase");
+                    if (theScheduledAppointment.Appointment_status == "available")
+                    {
+                        Future_Appointment newFuture_Appointment = new Future_Appointment()
+                        {
+                            AddressStreet = x.AddressStreet,
+                            AddressHouseNumber = x.AddressHouseNumber,
+                            AddressCity = x.AddressCity,
+                            Appointment_status = x.Appointment_status,
+                            Client_ID_number = x.Client_ID_number,
+                            Type_treatment_Number = x.Type_treatment_Number,
+                            Number_appointment = x.Number_appointment
+                        };
+                        db.Future_Appointment.Add(newFuture_Appointment);
+                        theScheduledAppointment.Appointment_status = "not available";
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK, "new Future_Appointment added to the dataBase");
+                  
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.NotFound, "this appointment not available");
+                    }
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, $"this Appointment not found any more"); //אם אין תור כזה.
+
+                }
             }
             catch (DbUpdateException ex)
             {
@@ -113,7 +155,7 @@ namespace BeautyMeWEB.Controllers
                 {
                     return BadRequest("הפרטים שהתקבלו אינם תקינים.");
                 }
-
+             
                 Future_Appointment CanceleFuture_Appointment = db.Future_Appointment.Find(x.Future_appointment_number);   // חיפוש הרשומה המתאימה לפי המזהה שלה
                 if (CanceleFuture_Appointment == null)
                 {
@@ -124,11 +166,16 @@ namespace BeautyMeWEB.Controllers
                 {
                     return BadRequest("לא ניתן לבטל את התור מכיוון שעבר זמן אפשרות הביטול");
                 }
+                else
+                {
+                  
+                    db.Future_Appointment.Remove(CanceleFuture_Appointment);   // מחיקת הרשומה מבסיס הנתונים
+                    Appointment theAppointmentThatCanceled = db.Appointment.FirstOrDefault(a => a.Number_appointment == x.Number_appointment);
+                    
+                    theAppointmentThatCanceled.Appointment_status = "available"; //שינוי סטטוס התור לתור פנוי בטבלת "תור"
 
-                db.Future_Appointment.Remove(CanceleFuture_Appointment);   // מחיקת הרשומה מבסיס הנתונים
-                db.Appointment.Add(CanceleFuture_Appointment.Appointment); //הוספת התור שבוטל לטבלת תורים פנויים (טבלת תור)
-                db.SaveChanges();
-
+                    db.SaveChanges();
+                }
                 return Ok("הנתונים נמחקו בהצלחה.");  // החזרת תשובה מתאימה לפי המצב
             }
         }
@@ -136,29 +183,3 @@ namespace BeautyMeWEB.Controllers
 }
 
 
-//// Post: api/Post
-//[HttpPost]
-//[Route("api/Future_Appointment/NewFuture_Appointment/{Client_ID_number}/{Type_treatment_Number}/{Number_appointmentt}")]
-//public HttpResponseMessage PostNewFuture_Appointment(string Client_ID_numberr, string Type_treatment_Numberr, string Number_appointmentt, [FromBody] Future_AppointmentDTO x)
-//{
-//    BeautyMeDBContext db = new BeautyMeDBContext();
-//    Future_Appointment newFuture_Appointment = new Future_Appointment()
-//    {
-//        //Future_appointment_number = x.Future_appointment_number,
-//        AddressStreet = x.AddressStreet,
-//        AddressHouseNumber = x.AddressHouseNumber,
-//        AddressCity = x.AddressCity,
-//        Appointment_status = x.Appointment_status,
-//        Client_ID_number = x.Client_ID_number,
-//        Type_treatment_Number = x.Type_treatment_Number,
-//        Number_appointment = x.Number_appointment
-//    };
-//    if (newFuture_Appointment != null)
-//    {
-//        db.Future_Appointment.Add(newFuture_Appointment);
-//        db.SaveChanges();
-//        return Request.CreateResponse(HttpStatusCode.OK, "new Future_Appointment added to the dataBase");
-//    }
-//    else
-//        return Request.CreateResponse(HttpStatusCode.NoContent);
-//}

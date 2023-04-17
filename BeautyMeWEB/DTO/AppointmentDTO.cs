@@ -13,6 +13,7 @@ namespace BeautyMeWEB.DTO
         public System.TimeSpan End_time;
         public string Is_client_house;
         public int Business_Number;
+        public string Appointment_status;
     }
 }
 

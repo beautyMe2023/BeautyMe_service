@@ -102,22 +102,3 @@ namespace BeautyMeWEB.Controllers
     }
 }
 
-
-
-//// Post: api/Post
-//[HttpPost]
-//[Route("api/Professional/NewProfessional")]
-//public HttpResponseMessage PostNewProfessional([FromBody] Professional value)
-//{
-//    BeautyMeDBContext db = new BeautyMeDBContext();
-//    Professional newProfessional = new Professional();
-//    newProfessional = value;
-//    if (newProfessional != null)
-//    {
-//        db.Professional.Add(newProfessional);
-//        db.SaveChanges();
-//        return Request.CreateResponse(HttpStatusCode.OK, "new Professional added to the dataBase");
-//    }
-//    else
-//        return Request.CreateResponse(HttpStatusCode.NoContent);
-//}

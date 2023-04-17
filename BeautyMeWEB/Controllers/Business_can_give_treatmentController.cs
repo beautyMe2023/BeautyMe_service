@@ -85,27 +85,3 @@ namespace BeautyMeWEB.Controllers
     }
 }
 
-
-//// Post: api/Post
-//[HttpPost]
-//[Route("api/Business_can_give_treatment/PostNewTreatmentOfBussines/{Business_Number}/{Type_treatment_Number}/{Category_Number}")]
-//public HttpResponseMessage PostNewTreatmentOfBussines(string Business_Numberr, string Type_treatment_Numberr, string Category_Numberr, [FromBody] Business_can_give_treatmentDTO x)
-//{
-//    BeautyMeDBContext db = new BeautyMeDBContext();
-//    Business_can_give_treatment newBusiness = new Business_can_give_treatment()
-//    {
-//        Type_treatment_Number = x.Type_treatment_Number,
-//        Category_Number = x.Category_Number,
-//        Business_Number = x.Business_Number,
-//        Price = x.Price,
-//        Treatment_duration = x.Treatment_duration,
-//    };
-//    if (newBusiness != null)
-//    {
-//        db.Business_can_give_treatment.Add(newBusiness);
-//        db.SaveChanges();
-//        return Request.CreateResponse(HttpStatusCode.OK, "new Business added to the dataBase");
-//    }
-//    else
-//        return Request.CreateResponse(HttpStatusCode.NoContent);
-//}
