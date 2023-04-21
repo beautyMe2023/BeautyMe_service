@@ -23,7 +23,7 @@ namespace BeautyMeWEB.Controllers
         {
             BeautyMeDBContext db = new BeautyMeDBContext();
             List<ClientDTO> AllClient = db.Client.Select(x => new ClientDTO
-            {
+            {//test for git
                 ID_number = x.ID_number,
                 First_name = x.First_name,
                 Last_name = x.Last_name,
