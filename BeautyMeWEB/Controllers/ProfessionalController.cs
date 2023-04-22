@@ -67,35 +67,35 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-        [HttpPost]
-        [Route("api/Professional/GetProfessional")]
-        public IHttpActionResult GetProfessional([FromBody] ProfessionalDTO user)
-        {
-            try
-            {
-                var userD = db.Professionals.Where(x => x.ID_number == user.ID_number && x.password == user.password).FirstOrDefault();
-                if (userD == null)
-                {
-                    return NotFound();
-                }
-                ProfessionalDTO newUser = new ProfessionalDTO();
-                newUser.ID_number = userD.ID_number;
-                newUser.First_name = userD.First_name;
-                newUser.Last_name = userD.Last_name;
-                newUser.birth_date = userD.birth_date;
-                newUser.gender = userD.gender;
-                newUser.phone = userD.phone;
-                newUser.Email = userD.Email;
-                newUser.AddressStreet = userD.AddressStreet;
-                newUser.AddressHouseNumber = userD.AddressHouseNumber;
-                newUser.AddressCity = userD.AddressCity;
-                return Ok(newUser);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpPost]
+        //[Route("api/Professional/GetProfessional")]
+        //public IHttpActionResult GetProfessional([FromBody] ProfessionalDTO user)
+        //{
+        //    try
+        //    {
+        //        var userD = db.Professionals.Where(x => x.ID_number == user.ID_number && x.password == user.password).FirstOrDefault();
+        //        if (userD == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        ProfessionalDTO newUser = new ProfessionalDTO();
+        //        newUser.ID_number = userD.ID_number;
+        //        newUser.First_name = userD.First_name;
+        //        newUser.Last_name = userD.Last_name;
+        //        newUser.birth_date = userD.birth_date;
+        //        newUser.gender = userD.gender;
+        //        newUser.phone = userD.phone;
+        //        newUser.Email = userD.Email;
+        //        newUser.AddressStreet = userD.AddressStreet;
+        //        newUser.AddressHouseNumber = userD.AddressHouseNumber;
+        //        newUser.AddressCity = userD.AddressCity;
+        //        return Ok(newUser);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
 
         // Post: api/Post
