@@ -24,6 +24,7 @@ namespace BeautyMe
         public int Number_appointment { get; set; }
     
         public virtual Appointment Appointment { get; set; }
+        public virtual Appointment Appointment1 { get; set; }
         public virtual Client Client { get; set; }
         public virtual Client Client1 { get; set; }
         public virtual Type_Treatment Type_Treatment { get; set; }

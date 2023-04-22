@@ -15,10 +15,10 @@ namespace BeautyMe
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class BeautyMeDBContext : DbContext
+    public partial class BeautyMeDBContext1 : DbContext
     {
-        public BeautyMeDBContext()
-            : base("name=BeautyMeDBContext")
+        public BeautyMeDBContext1()
+            : base("name=BeautyMeDBContext1")
         {
         }
     
@@ -27,17 +27,17 @@ namespace BeautyMe
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Appointment> Appointment { get; set; }
+        public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Appointment_can_give_treatment> Appointment_can_give_treatment { get; set; }
-        public virtual DbSet<Business> Business { get; set; }
+        public virtual DbSet<Business> Businesses { get; set; }
         public virtual DbSet<Business_can_give_treatment> Business_can_give_treatment { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Future_Appointment> Future_Appointment { get; set; }
-        public virtual DbSet<Professional> Professional { get; set; }
+        public virtual DbSet<Professional> Professionals { get; set; }
         public virtual DbSet<Review_Business> Review_Business { get; set; }
         public virtual DbSet<Review_Client> Review_Client { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Treatment_of_category> Treatment_of_category { get; set; }
         public virtual DbSet<Type_Treatment> Type_Treatment { get; set; }
     

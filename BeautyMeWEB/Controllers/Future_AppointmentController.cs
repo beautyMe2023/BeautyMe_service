@@ -20,12 +20,14 @@ namespace BeautyMeWEB.Controllers
 {
     public class Future_AppointmentController : ApiController
     {
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
+
         // GET: Future_Appointment
         [HttpGet]
         [Route("api/Future_Appointment/AllFuture_Appointment")]
         public HttpResponseMessage GetAllFuture_Appointment()
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
+ 
             List<Future_AppointmentDTO> AllFuture_Appointment = db.Future_Appointment.Select(x => new Future_AppointmentDTO
             {
                 Future_appointment_number = x.Future_appointment_number,
@@ -49,7 +51,7 @@ namespace BeautyMeWEB.Controllers
         [Route("api/Future_Appointment/AllFuture_AppointmentForClient")]
         public HttpResponseMessage GetAllFuture_AppointmentForClient([FromBody] string Client_ID_numberr)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
+ 
             List<Future_AppointmentDTO> AllFuture_Appointment = db.Future_Appointment.Where(a => a.Client_ID_number == Client_ID_numberr).Select(x => new Future_AppointmentDTO
             {
                 Future_appointment_number = x.Future_appointment_number,
@@ -76,8 +78,8 @@ namespace BeautyMeWEB.Controllers
         {
             try
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
-                Appointment theScheduledAppointment = db.Appointment.Find(x.Number_appointment);
+ 
+                Appointment theScheduledAppointment = db.Appointments.Find(x.Number_appointment);
                 if (theScheduledAppointment != null)
                 {
                     if (theScheduledAppointment.Appointment_status == "available")
@@ -121,7 +123,7 @@ namespace BeautyMeWEB.Controllers
         [Route("api/Future_Appointment/UpdateFuture_Appointment")]
         public HttpResponseMessage PutUpdateFuture_Appointment([FromBody] Future_AppointmentDTO x)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
+ 
             Future_Appointment Future_AppointmentToUpdate = db.Future_Appointment.FirstOrDefault(a => a.Number_appointment == x.Number_appointment);
             if (Future_AppointmentToUpdate == null)
             {
@@ -149,7 +151,7 @@ namespace BeautyMeWEB.Controllers
         [Route("api/Future_Appointment/CanceleFuture_Appointment")]
         public IHttpActionResult DeleteCanceleFuture_Appointment([FromBody] Future_AppointmentDTO x)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
+ 
             {
                 if (x == null)  // בדיקת תקינות ה-DTO שהתקבל
                 {
@@ -170,7 +172,7 @@ namespace BeautyMeWEB.Controllers
                 {
                   
                     db.Future_Appointment.Remove(CanceleFuture_Appointment);   // מחיקת הרשומה מבסיס הנתונים
-                    Appointment theAppointmentThatCanceled = db.Appointment.FirstOrDefault(a => a.Number_appointment == x.Number_appointment);
+                    Appointment theAppointmentThatCanceled = db.Appointments.FirstOrDefault(a => a.Number_appointment == x.Number_appointment);
                     
                     theAppointmentThatCanceled.Appointment_status = "available"; //שינוי סטטוס התור לתור פנוי בטבלת "תור"
 

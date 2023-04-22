@@ -17,11 +17,11 @@ namespace BeautyMeWEB.Controllers
     public class Business_can_give_treatmentController : ApiController
     {
         // GET: Business_can_give_treatment   //get כללי...מחזיר את כל הטבלה
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
         [HttpGet]
         [Route("api/Business_can_give_treatment/AllTreatmentOfBusiness")]
         public HttpResponseMessage GetAllTreatmentOfBusiness()
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
             List<Business_can_give_treatmentDTO> AllTreatmentOfBusiness = db.Business_can_give_treatment.Select(x => new Business_can_give_treatmentDTO
             {
                 Type_treatment_Number = x.Type_treatment_Number,
@@ -41,7 +41,7 @@ namespace BeautyMeWEB.Controllers
         [Route("api/Business_can_give_treatmentController/All_the_treatments_appointment_can_give")]
         public HttpResponseMessage GetAll_the_treatments_businnes_can_give([FromBody] int Business_Numberr)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
+ 
             List<Business_can_give_treatmentDTO> all_the_treatments_businnes_can_give = db.Business_can_give_treatment.Where(a => a.Business_Number == Business_Numberr).Select(x => new Business_can_give_treatmentDTO
             {
                 Type_treatment_Number = x.Type_treatment_Number,
@@ -64,7 +64,7 @@ namespace BeautyMeWEB.Controllers
         {
             try
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
+ 
                 Business_can_give_treatment newBusiness = new Business_can_give_treatment()
                 {
                     Type_treatment_Number = x.Type_treatment_Number,

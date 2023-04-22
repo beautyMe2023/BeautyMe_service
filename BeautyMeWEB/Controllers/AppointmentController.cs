@@ -20,12 +20,13 @@ namespace BeautyMeWEB.Controllers
     public class AppointmentController : ApiController
     {
         // GET: Appointment
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
+
         [HttpGet]
         [Route("api/Appointment/AllAppointment")]
         public HttpResponseMessage GetAllAppointment()
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            List<AppointmentDTO> AllAppointment = db.Appointment.Select(x => new AppointmentDTO
+            List<AppointmentDTO> AllAppointment = db.Appointments.Select(x => new AppointmentDTO
             {
                 Number_appointment = x.Number_appointment,
                 Date = x.Date,
@@ -46,8 +47,7 @@ namespace BeautyMeWEB.Controllers
         [Route("api/Appointment/AllAppointmentForBussines")]
         public HttpResponseMessage GetAllAppointmentForBussines([FromBody] int Business_Numberr)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            List<AppointmentDTO> AllAppointment = db.Appointment.Where(a => a.Business_Number == Business_Numberr).Select(x => new AppointmentDTO
+            List<AppointmentDTO> AllAppointment = db.Appointments.Where(a => a.Business_Number == Business_Numberr).Select(x => new AppointmentDTO
             {
                 Number_appointment = x.Number_appointment,
                 Date = x.Date,
@@ -71,7 +71,6 @@ namespace BeautyMeWEB.Controllers
         {
             try
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
                 Appointment newAppointment = new Appointment()
                 {
                     //Number_appointment = x.Number_appointment,
@@ -83,7 +82,7 @@ namespace BeautyMeWEB.Controllers
                     Appointment_status = x.Appointment_status,
 
                 };
-                db.Appointment.Add(newAppointment);
+                db.Appointments.Add(newAppointment);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "new Appointment added to the dataBase");
             }
@@ -99,8 +98,7 @@ namespace BeautyMeWEB.Controllers
         [Route("api/Appointment/UpdateAppointment")]
         public HttpResponseMessage PutUpdateAppointment([FromBody] AppointmentDTO x)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            Appointment AppointmentToUpdate = db.Appointment.FirstOrDefault(a => a.Number_appointment == x.Number_appointment);
+            Appointment AppointmentToUpdate = db.Appointments.FirstOrDefault(a => a.Number_appointment == x.Number_appointment);
             if (AppointmentToUpdate == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Appointment with number {x.Number_appointment} not found.");
@@ -127,25 +125,22 @@ namespace BeautyMeWEB.Controllers
         [Route("api/Appointment/CanceleAppointment")]
         public IHttpActionResult DeleteCanceleAppointment([FromBody] AppointmentDTO x)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
+            if (x == null)  // בדיקת תקינות ה-DTO שהתקבל
             {
-                if (x == null)  // בדיקת תקינות ה-DTO שהתקבל
-                {
-                    return BadRequest("הפרטים שהתקבלו אינם תקינים.");
-                }
-
-                Appointment CanceleAppointment = db.Appointment.Find(x.Number_appointment);   // חיפוש הרשומה המתאימה לפי המזהה שלה
-                if (CanceleAppointment == null)
-                {
-                    return NotFound();
-                }
-
-                db.Appointment.Remove(CanceleAppointment);   // מחיקת הרשומה מבסיס הנתונים
-
-                db.SaveChanges();
-
-                return Ok("הנתונים נמחקו בהצלחה.");  // החזרת תשובה מתאימה לפי המצב
+                return BadRequest("הפרטים שהתקבלו אינם תקינים.");
             }
+
+            Appointment CanceleAppointment = db.Appointments.Find(x.Number_appointment);   // חיפוש הרשומה המתאימה לפי המזהה שלה
+            if (CanceleAppointment == null)
+            {
+                return NotFound();
+            }
+
+            db.Appointments.Remove(CanceleAppointment);   // מחיקת הרשומה מבסיס הנתונים
+
+            db.SaveChanges();
+
+            return Ok("הנתונים נמחקו בהצלחה.");  // החזרת תשובה מתאימה לפי המצב
         }
     }
 }

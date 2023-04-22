@@ -19,12 +19,14 @@ namespace BeautyMeWEB.Controllers
 {
     public class Appointment_can_give_treatmentController : ApiController
     {
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
+
         // GET: api/Appointment_can_give_treatmentController/All_the_treatments_appointment_can_give   מחזיר את כל סוגי הטיפולים האפשריים לתור מסויים
         [HttpGet]
         [Route("api/Appointment_can_give_treatmentController/All_the_treatments_appointment_can_give")]
         public HttpResponseMessage GetAll_the_treatments_appointment_can_give([FromBody] int Number_appointmentt)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
+            BeautyMeDBContext1 db = new BeautyMeDBContext1();
             List<Appointment_can_give_treatmentDTO> all_the_treatments_appointment_can_give = db.Appointment_can_give_treatment.Where(a => a.Number_appointment == Number_appointmentt).Select(x => new Appointment_can_give_treatmentDTO
             {
                 number = x.number,
@@ -44,7 +46,7 @@ namespace BeautyMeWEB.Controllers
         {
             try
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
+ 
                 Appointment_can_give_treatment newAppointment_can_give_treatment = new Appointment_can_give_treatment()
                 {
                     Type_treatment_Number = x.Type_treatment_Number,

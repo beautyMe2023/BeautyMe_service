@@ -16,13 +16,13 @@ namespace BeautyMeWEB.Controllers
 {
     public class ClientController : ApiController
     {
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
         // GET: Client
         [HttpGet]
         [Route("api/Client/AllClient")]
         public HttpResponseMessage GetAllClient()
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            List<ClientDTO> AllClient = db.Client.Select(x => new ClientDTO
+            List<ClientDTO> AllClient = db.Clients.Select(x => new ClientDTO
             {
                 ID_number = x.ID_number,
                 First_name = x.First_name,
@@ -43,11 +43,10 @@ namespace BeautyMeWEB.Controllers
 
         // GET: api/Client/OneClient
         [HttpGet]
-        [Route("api/Client/OneClient")]
-        public HttpResponseMessage GetOneClient([FromBody]SearchPeopleDTO v)
+        [Route("api/Client/OneClient/{ID_number}/{password}")]
+        public HttpResponseMessage GetOneClient(string ID_number, string password  )
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            ClientDTO oneClient = db.Client.Where(a => a.ID_number == v.id_number && a.password == v.password).Select(x => new ClientDTO
+            ClientDTO oneClient = db.Clients.Where(a => a.ID_number == ID_number && a.password == password).Select(x => new ClientDTO
             {
                 ID_number = x.ID_number,
                 First_name = x.First_name,
@@ -67,8 +66,6 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-
-
         // Post: api/Post
         [HttpPost]
         [Route("api/Client/NewClient")]
@@ -76,7 +73,6 @@ namespace BeautyMeWEB.Controllers
         {
             try
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
                 Client newClient = new Client()
                 {
                     ID_number = x.ID_number,
@@ -91,7 +87,7 @@ namespace BeautyMeWEB.Controllers
                     AddressCity = x.AddressCity,
                     password = x.password
                 };
-                db.Client.Add(newClient);
+                db.Clients.Add(newClient);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "New client added to the database");
             }

@@ -17,8 +17,8 @@ namespace BeautyMe
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Professional()
         {
-            this.Business = new HashSet<Business>();
-            this.Business1 = new HashSet<Business>();
+            this.Businesses = new HashSet<Business>();
+            this.Businesses1 = new HashSet<Business>();
             this.Review_Business = new HashSet<Review_Business>();
             this.Review_Client = new HashSet<Review_Client>();
         }
@@ -36,9 +36,9 @@ namespace BeautyMe
         public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Business> Business { get; set; }
+        public virtual ICollection<Business> Businesses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Business> Business1 { get; set; }
+        public virtual ICollection<Business> Businesses1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review_Business> Review_Business { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

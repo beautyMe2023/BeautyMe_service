@@ -16,13 +16,13 @@ namespace BeautyMeWEB.Controllers
 {
     public class BusinessController : ApiController
     {
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
         // GET: Business
         [HttpGet]
         [Route("api/Business/AllBusiness")]
         public HttpResponseMessage GetAllBusiness()
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            List<BusinessDTO> AllBusiness = db.Business.Select(x => new BusinessDTO
+            List<BusinessDTO> AllBusiness = db.Businesses.Select(x => new BusinessDTO
             {
                 Business_Number = x.Business_Number,
                 Name = x.Name,
@@ -46,7 +46,6 @@ namespace BeautyMeWEB.Controllers
         {
             try
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
                 Business newBusiness = new Business()
                 {
                     //Business_Number = x.Business_Number,
@@ -57,7 +56,7 @@ namespace BeautyMeWEB.Controllers
                     Is_client_house = x.Is_client_house,
                     Professional_ID_number = x.Professional_ID_number
                 };
-                db.Business.Add(newBusiness);
+                db.Businesses.Add(newBusiness);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "new Business added to the dataBase");
             }

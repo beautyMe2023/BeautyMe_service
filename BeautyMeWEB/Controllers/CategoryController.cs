@@ -15,13 +15,15 @@ namespace BeautyMeWEB.Controllers
 {
     public class CategoryController : ApiController
     {
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
+
         // GET: Category
         [HttpGet]
         [Route("api/Category/AllCategory")]
         public HttpResponseMessage GetAllCategory()
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            List<CategoryDTO> AllCategory = db.Category.Select(x => new CategoryDTO
+ 
+            List<CategoryDTO> AllCategory = db.Categories.Select(x => new CategoryDTO
             {
                 Category_Number = x.Category_Number,
                 Name = x.Name

@@ -20,6 +20,7 @@ namespace BeautyMe
             this.Appointment_can_give_treatment = new HashSet<Appointment_can_give_treatment>();
             this.Appointment_can_give_treatment1 = new HashSet<Appointment_can_give_treatment>();
             this.Future_Appointment = new HashSet<Future_Appointment>();
+            this.Future_Appointment1 = new HashSet<Future_Appointment>();
         }
     
         public int Number_appointment { get; set; }
@@ -38,5 +39,7 @@ namespace BeautyMe
         public virtual ICollection<Appointment_can_give_treatment> Appointment_can_give_treatment1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Future_Appointment> Future_Appointment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Future_Appointment> Future_Appointment1 { get; set; }
     }
 }

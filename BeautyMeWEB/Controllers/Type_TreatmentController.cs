@@ -16,11 +16,11 @@ namespace BeautyMeWEB.Controllers
     public class Type_TreatmentController : ApiController
     {
         // GET: Type_Treatment
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
         [HttpGet]
         [Route("api/Type_Treatment/AllCategory")]
         public HttpResponseMessage GetAllType_Treatment()
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
             List<Type_TreatmentDTO> AllType_Treatment = db.Type_Treatment.Select(x => new Type_TreatmentDTO
             {
                 Type_treatment_Number = x.Type_treatment_Number,

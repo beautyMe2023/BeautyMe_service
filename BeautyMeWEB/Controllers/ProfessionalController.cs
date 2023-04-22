@@ -16,13 +16,13 @@ namespace BeautyMeWEB.Controllers
 {
     public class ProfessionalController : ApiController
     {
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
         // GET: Professional
         [HttpGet]
         [Route("api/Professional/AllProfessional")]
         public HttpResponseMessage GetAllProfessional()
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            List<ProfessionalDTO> AllProfessionals = db.Professional.Select(x => new ProfessionalDTO
+            List<ProfessionalDTO> AllProfessionals = db.Professionals.Select(x => new ProfessionalDTO
             {
                 ID_number = x.ID_number,
                 First_name = x.First_name,
@@ -43,12 +43,11 @@ namespace BeautyMeWEB.Controllers
         }
 
         // GET: api/Professional/OneProfessional
-        [HttpGet]
+        [HttpPost]
         [Route("api/Professional/OneProfessional")]
-        public HttpResponseMessage GetOneProfessional([FromBody] SearchPeopleDTO v)
+        public HttpResponseMessage GetOneProfessional([FromBody] ProfessionalDTO v)
         {
-            BeautyMeDBContext db = new BeautyMeDBContext();
-            ProfessionalDTO oneProfessional = db.Professional.Where(a => a.ID_number == v.id_number && a.password == v.password).Select(x => new ProfessionalDTO
+            ProfessionalDTO oneProfessional = db.Professionals.Where(a => a.ID_number == v.ID_number && a.password == v.password).Select(x => new ProfessionalDTO
             {
                 ID_number = x.ID_number,
                 First_name = x.First_name,
@@ -68,6 +67,37 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
+        [HttpPost]
+        [Route("api/Professional/GetProfessional")]
+        public IHttpActionResult GetProfessional([FromBody] ProfessionalDTO user)
+        {
+            try
+            {
+                var userD = db.Professionals.Where(x => x.ID_number == user.ID_number && x.password == user.password).FirstOrDefault();
+                if (userD == null)
+                {
+                    return NotFound();
+                }
+                ProfessionalDTO newUser = new ProfessionalDTO();
+                newUser.ID_number = userD.ID_number;
+                newUser.First_name = userD.First_name;
+                newUser.Last_name = userD.Last_name;
+                newUser.birth_date = userD.birth_date;
+                newUser.gender = userD.gender;
+                newUser.phone = userD.phone;
+                newUser.Email = userD.Email;
+                newUser.AddressStreet = userD.AddressStreet;
+                newUser.AddressHouseNumber = userD.AddressHouseNumber;
+                newUser.AddressCity = userD.AddressCity;
+                return Ok(newUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         // Post: api/Post
         [HttpPost]
         [Route("api/Professional/NewProfessional")]
@@ -75,7 +105,6 @@ namespace BeautyMeWEB.Controllers
         {
             try
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
                 Professional newProfessional = new Professional()
                 {
                     ID_number = x.ID_number,
@@ -90,7 +119,7 @@ namespace BeautyMeWEB.Controllers
                     AddressCity = x.AddressCity,
                     password = x.password
                 };
-                db.Professional.Add(newProfessional);
+                db.Professionals.Add(newProfessional);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "new Professional added to the dataBase");
             }

@@ -17,6 +17,8 @@ namespace BeautyMeWEB.Controllers
 {
     public class SearchController : ApiController
     {
+        BeautyMeDBContext1 db = new BeautyMeDBContext1();
+
         // GET: Search
         [HttpGet]
         [Route("api/Search/Searchh")]
@@ -24,9 +26,9 @@ namespace BeautyMeWEB.Controllers
         {
             if (x.Is_client_house == null && x.gender == null)
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
+ 
                 int number_treatment = db.Type_Treatment.FirstOrDefault(i => i.Name == x.NameTreatment).Type_treatment_Number;
-                List<AppointmentDTO> SearchListForType_treatment = db.Appointment.Include(a => a.Appointment_can_give_treatment) // כדי לקבל את פרטי סוג הטיפול של התור
+                List<AppointmentDTO> SearchListForType_treatment = db.Appointments.Include(a => a.Appointment_can_give_treatment) // כדי לקבל את פרטי סוג הטיפול של התור
                                                                            .Include(a => a.Business) // כדי לקבל את פרטי העסק של התור
                                                                            .Where(a => a.Appointment_status == "available" && a.Business.AddressCity == x.AddressCity && a.Appointment_can_give_treatment.Any(t => t.Type_treatment_Number == number_treatment))
                                                                            .Select(a => new AppointmentDTO
@@ -44,9 +46,8 @@ namespace BeautyMeWEB.Controllers
             }
             if (x.Is_client_house != null && x.gender == null)
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
                 int number_treatment = db.Type_Treatment.FirstOrDefault(i => i.Name == x.NameTreatment).Type_treatment_Number;
-                List<AppointmentDTO> SearchListForType_treatment = db.Appointment.Include(a => a.Appointment_can_give_treatment) // כדי לקבל את פרטי סוג הטיפול של התור
+                List<AppointmentDTO> SearchListForType_treatment = db.Appointments.Include(a => a.Appointment_can_give_treatment) // כדי לקבל את פרטי סוג הטיפול של התור
                                                                            .Include(a => a.Business) // כדי לקבל את פרטי העסק של התור
                                                                            .Where(a => a.Appointment_status == "available" && a.Business.AddressCity == x.AddressCity && a.Appointment_can_give_treatment.Any(t => t.Type_treatment_Number == number_treatment) && a.Is_client_house == x.Is_client_house)
                                                                            .Select(a => new AppointmentDTO
@@ -63,9 +64,8 @@ namespace BeautyMeWEB.Controllers
             }
             if (x.Is_client_house == null && x.gender != null)
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
                 int number_treatment = db.Type_Treatment.FirstOrDefault(i => i.Name == x.NameTreatment).Type_treatment_Number;
-                List<AppointmentDTO> SearchListForType_treatment = db.Appointment.Include(a => a.Appointment_can_give_treatment) // כדי לקבל את פרטי סוג הטיפול של התור
+                List<AppointmentDTO> SearchListForType_treatment = db.Appointments.Include(a => a.Appointment_can_give_treatment) // כדי לקבל את פרטי סוג הטיפול של התור
                                                                            .Include(a => a.Business) // כדי לקבל את פרטי העסק של התור
                                                                            .Include(a => a.Business.Professional) // כדי לקבל את פרטי בעל העסק
                                                                            .Where(a => a.Appointment_status == "available" && a.Business.AddressCity == x.AddressCity && a.Appointment_can_give_treatment.Any(t => t.Type_treatment_Number == number_treatment)
@@ -84,9 +84,8 @@ namespace BeautyMeWEB.Controllers
             }
             else //if (x.Is_client_house != null && x.gender != null)
             {
-                BeautyMeDBContext db = new BeautyMeDBContext();
                 int number_treatment = db.Type_Treatment.FirstOrDefault(i => i.Name == x.NameTreatment).Type_treatment_Number;
-                List<AppointmentDTO> SearchListForType_treatment = db.Appointment.Include(a => a.Appointment_can_give_treatment) // כדי לקבל את פרטי סוג הטיפול של התור
+                List<AppointmentDTO> SearchListForType_treatment = db.Appointments.Include(a => a.Appointment_can_give_treatment) // כדי לקבל את פרטי סוג הטיפול של התור
                                                                            .Include(a => a.Business) // כדי לקבל את פרטי העסק של התור
                                                                            .Include(a => a.Business.Professional) // כדי לקבל את פרטי בעל העסק
                                                                            .Where(a => a.Appointment_status == "available" && a.Business.AddressCity == x.AddressCity && a.Appointment_can_give_treatment.Any(t => t.Type_treatment_Number == number_treatment)
