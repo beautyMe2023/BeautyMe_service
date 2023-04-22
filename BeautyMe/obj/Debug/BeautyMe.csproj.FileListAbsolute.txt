@@ -34,3 +34,15 @@ C:\Users\Inbar\Desktop\beautymeserviceee\BeautyMe\obj\Debug\BeautyMe.csproj.Core
 C:\Users\Inbar\Desktop\beautymeserviceee\BeautyMe\obj\Debug\BeautyMe.csproj.CopyComplete
 C:\Users\Inbar\Desktop\beautymeserviceee\BeautyMe\obj\Debug\BeautyMe.dll
 C:\Users\Inbar\Desktop\beautymeserviceee\BeautyMe\obj\Debug\BeautyMe.pdb
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\bin\Debug\BeautyMe.dll.config
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\bin\Debug\BeautyMe.dll
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\bin\Debug\BeautyMe.pdb
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\bin\Debug\EntityFramework.dll
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\bin\Debug\EntityFramework.xml
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\obj\Debug\BeautyMe.csproj.AssemblyReference.cache
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\obj\Debug\BeautyMe.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\obj\Debug\BeautyMe.csproj.CopyComplete
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\obj\Debug\BeautyMe.dll
+C:\Users\Asus\Documents\beautymeserviceeee\BeautyMe\obj\Debug\BeautyMe.pdb
