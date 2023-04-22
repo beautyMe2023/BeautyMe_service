@@ -66,7 +66,9 @@ namespace BeautyMeWEB.Controllers
             else
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
-
+        //
+        //
+        //
         //[HttpPost]
         //[Route("api/Professional/GetProfessional")]
         //public IHttpActionResult GetProfessional([FromBody] ProfessionalDTO user)
