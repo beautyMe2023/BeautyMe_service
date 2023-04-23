@@ -14,9 +14,11 @@ using System.Data.Entity;
 using HttpDeleteAttribute = System.Web.Http.HttpDeleteAttribute;
 using HttpPutAttribute = System.Web.Http.HttpPutAttribute;
 using System.Data.Entity.Infrastructure;
+using NLog;
 
 namespace BeautyMeWEB.Controllers
 {
+    static Logger logger = LogManager.GetCurrentClassLogger();
     public class Appointment_can_give_treatmentController : ApiController
     {
         // GET: api/Appointment_can_give_treatmentController/All_the_treatments_appointment_can_give   מחזיר את כל סוגי הטיפולים האפשריים לתור מסויים
