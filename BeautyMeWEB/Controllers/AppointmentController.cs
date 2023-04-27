@@ -42,8 +42,8 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-        // GET: Appointment
-        [HttpGet]
+        // Post: Appointment
+        [HttpPost]
         [Route("api/Appointment/AllAppointmentForBussines")]
         public HttpResponseMessage GetAllAppointmentForBussines([FromBody] int Business_Numberr)
         {
@@ -84,7 +84,8 @@ namespace BeautyMeWEB.Controllers
                 };
                 db.Appointments.Add(newAppointment);
                 db.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK, "new Appointment added to the dataBase");
+                int newAppointmentId = newAppointment.Number_appointment;
+                return Request.CreateResponse(HttpStatusCode.OK, new { message = "New appointment added to the database", appointmentId = newAppointmentId });
             }
             catch (DbUpdateException ex)
             {

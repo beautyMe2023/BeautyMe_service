@@ -46,8 +46,8 @@ namespace BeautyMeWEB.Controllers
         }
 
 
-        // GET: Future_Appointment
-        [HttpGet]
+        // Post: Future_Appointment
+        [HttpPost]
         [Route("api/Future_Appointment/AllFuture_AppointmentForClient")]
         public HttpResponseMessage GetAllFuture_AppointmentForClient([FromBody] string Client_ID_numberr)
         {

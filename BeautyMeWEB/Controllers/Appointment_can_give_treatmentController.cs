@@ -21,8 +21,8 @@ namespace BeautyMeWEB.Controllers
     {
         BeautyMeDBContext1 db = new BeautyMeDBContext1();
 
-        // GET: api/Appointment_can_give_treatmentController/All_the_treatments_appointment_can_give   מחזיר את כל סוגי הטיפולים האפשריים לתור מסויים
-        [HttpGet]
+        // Post: api/Appointment_can_give_treatmentController/All_the_treatments_appointment_can_give   מחזיר את כל סוגי הטיפולים האפשריים לתור מסויים
+        [HttpPost]
         [Route("api/Appointment_can_give_treatmentController/All_the_treatments_appointment_can_give")]
         public HttpResponseMessage GetAll_the_treatments_appointment_can_give([FromBody] int Number_appointmentt)
         {

@@ -42,12 +42,12 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-        // GET: api/Professional/OneProfessional
+        // Post: api/Professional/OneProfessional פונקציה שמקבלת ת.ז וסיסמה ומחזירה את המשתמש
         [HttpPost]
         [Route("api/Professional/OneProfessional")]
-        public HttpResponseMessage GetOneProfessional([FromBody] ProfessionalDTO v)
+        public HttpResponseMessage GetOneProfessional([FromBody] SearchPeopleDTO v)
         {
-            ProfessionalDTO oneProfessional = db.Professionals.Where(a => a.ID_number == v.ID_number && a.password == v.password).Select(x => new ProfessionalDTO
+            ProfessionalDTO oneProfessional = db.Professionals.Where(a => a.ID_number == v.id_number && a.password == v.password).Select(x => new ProfessionalDTO
             {
                 ID_number = x.ID_number,
                 First_name = x.First_name,

@@ -41,12 +41,12 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-        // GET: api/Client/OneClient
-        [HttpGet]
-        [Route("api/Client/OneClient/{ID_number}/{password}")]
-        public HttpResponseMessage GetOneClient(string ID_number, string password  )
+        // Post: api/Client/OneClient פונקציה שמקבלת ת.ז וסיסמה ומחזירה את המשתמש
+        [HttpPost]
+        [Route("api/Client/OneClient")]
+        public HttpResponseMessage GetOneClient([FromBody] SearchPeopleDTO v)
         {
-            ClientDTO oneClient = db.Clients.Where(a => a.ID_number == ID_number && a.password == password).Select(x => new ClientDTO
+            ClientDTO oneClient = db.Clients.Where(a => a.ID_number == v.id_number && a.password == v.password).Select(x => new ClientDTO
             {
                 ID_number = x.ID_number,
                 First_name = x.First_name,
@@ -65,6 +65,31 @@ namespace BeautyMeWEB.Controllers
             else
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
+
+        //// GET: api/Client/OneClient
+        //[HttpGet]
+        //[Route("api/Client/OneClient/{ID_number}/{password}")]
+        //public HttpResponseMessage GetOneClient(string ID_number, string password  )
+        //{
+        //    ClientDTO oneClient = db.Clients.Where(a => a.ID_number == ID_number && a.password == password).Select(x => new ClientDTO
+        //    {
+        //        ID_number = x.ID_number,
+        //        First_name = x.First_name,
+        //        Last_name = x.Last_name,
+        //        birth_date = x.birth_date,
+        //        gender = x.gender,
+        //        phone = x.phone,
+        //        Email = x.Email,
+        //        AddressStreet = x.AddressStreet,
+        //        AddressHouseNumber = x.AddressHouseNumber,
+        //        AddressCity = x.AddressCity,
+        //        password = x.password
+        //    }).FirstOrDefault();
+        //    if (oneClient != null)
+        //        return Request.CreateResponse(HttpStatusCode.OK, oneClient);
+        //    else
+        //        return Request.CreateResponse(HttpStatusCode.NotFound);
+        //}
 
         // Post: api/Post
         [HttpPost]

@@ -36,8 +36,8 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-        // GET: api/Business_can_give_treatmentController/All_the_treatments_bussines_can_give   //get ספציפי...מחזיר את כל הטיפולים שיש לעסק מסויים
-        [HttpGet]
+        // Post: api/Business_can_give_treatmentController/All_the_treatments_bussines_can_give   //Post ספציפי...מחזיר את כל הטיפולים שיש לעסק מסויים
+        [HttpPost]
         [Route("api/Business_can_give_treatmentController/All_the_treatments_appointment_can_give")]
         public HttpResponseMessage GetAll_the_treatments_businnes_can_give([FromBody] int Business_Numberr)
         {

@@ -19,8 +19,8 @@ namespace BeautyMeWEB.Controllers
     {
         BeautyMeDBContext1 db = new BeautyMeDBContext1();
 
-        // GET: Search
-        [HttpGet]
+        // Post: Search
+        [HttpPost]
         [Route("api/Search/Searchh")]
         public HttpResponseMessage GetSearchh([FromBody] SearchDTO x)
         {

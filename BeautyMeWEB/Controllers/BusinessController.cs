@@ -38,6 +38,27 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
+        // Post: api/Business/OneBusiness פונקציה שמקבלת מספר תור ומחזירה את התור הספציפי
+        [HttpPost]
+        [Route("api/Business/OneBusiness")]
+        public HttpResponseMessage GetOneBusiness([FromBody] int business_num)
+        {
+            BusinessDTO oneBusiness = db.Businesses.Where(a => a.Business_Number == business_num).Select(x => new BusinessDTO
+            {
+                Business_Number = x.Business_Number,
+                Name = x.Name,
+                AddressStreet = x.AddressStreet,
+                AddressHouseNumber = x.AddressHouseNumber,
+                AddressCity = x.AddressCity,
+                Is_client_house = x.Is_client_house,
+                Professional_ID_number = x.Professional_ID_number,
+            }).FirstOrDefault();
+            if (oneBusiness != null)
+                return Request.CreateResponse(HttpStatusCode.OK, oneBusiness);
+            else
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+
         // Post: api/Post
         [HttpPost]
         [Route("api/Business/NewBusiness")]
@@ -58,8 +79,10 @@ namespace BeautyMeWEB.Controllers
                 };
                 db.Businesses.Add(newBusiness);
                 db.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK, "new Business added to the dataBase");
+                int newBusinessId = newBusiness.Business_Number;
+                return Request.CreateResponse(HttpStatusCode.OK, new { message = "new Business added to the dataBase", businessId = newBusinessId });
             }
+        
             catch (DbUpdateException ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Error occurred while adding new bussines to the database: " + ex.InnerException.InnerException.Message);
