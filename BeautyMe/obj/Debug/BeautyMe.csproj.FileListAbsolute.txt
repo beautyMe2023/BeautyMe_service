@@ -22,3 +22,17 @@ C:\Users\Asus\Documents\beautymeserviceee\BeautyMe\obj\Debug\BeautyMe.csproj.Cor
 C:\Users\Asus\Documents\beautymeserviceee\BeautyMe\obj\Debug\BeautyMe.csproj.CopyComplete
 C:\Users\Asus\Documents\beautymeserviceee\BeautyMe\obj\Debug\BeautyMe.dll
 C:\Users\Asus\Documents\beautymeserviceee\BeautyMe\obj\Debug\BeautyMe.pdb
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\BeautyMe.dll.config
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\BeautyMe.dll
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\BeautyMe.pdb
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\EntityFramework.dll
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\NLog.dll
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\EntityFramework.xml
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\bin\Debug\NLog.xml
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\obj\Debug\BeautyMe.csproj.AssemblyReference.cache
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\obj\Debug\BeautyMe.csproj.CoreCompileInputs.cache
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\obj\Debug\BeautyMe.csproj.CopyComplete
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\obj\Debug\BeautyMe.dll
+C:\Users\ofirt\OneDrive\Desktop\beautymeserviceee-main\BeautyMe\obj\Debug\BeautyMe.pdb

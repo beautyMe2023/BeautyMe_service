@@ -126,6 +126,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Nlog.Config" />
     <None Include="App.Config" />
     <None Include="BeautyMeEFModel.edmx.diagram">
       <DependentUpon>BeautyMeEFModel.edmx</DependentUpon>

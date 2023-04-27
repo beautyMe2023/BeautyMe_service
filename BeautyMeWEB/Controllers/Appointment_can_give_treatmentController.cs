@@ -18,7 +18,6 @@ using NLog;
 
 namespace BeautyMeWEB.Controllers
 {
-    static Logger logger = LogManager.GetCurrentClassLogger();
     public class Appointment_can_give_treatmentController : ApiController
     {
         // GET: api/Appointment_can_give_treatmentController/All_the_treatments_appointment_can_give   מחזיר את כל סוגי הטיפולים האפשריים לתור מסויים
@@ -26,6 +25,7 @@ namespace BeautyMeWEB.Controllers
         [Route("api/Appointment_can_give_treatmentController/All_the_treatments_appointment_can_give")]
         public HttpResponseMessage GetAll_the_treatments_appointment_can_give([FromBody] int Number_appointmentt)
         {
+
             BeautyMeDBContext db = new BeautyMeDBContext();
             List<Appointment_can_give_treatmentDTO> all_the_treatments_appointment_can_give = db.Appointment_can_give_treatment.Where(a => a.Number_appointment == Number_appointmentt).Select(x => new Appointment_can_give_treatmentDTO
             {
