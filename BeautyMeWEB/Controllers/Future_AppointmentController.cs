@@ -48,8 +48,8 @@ namespace BeautyMeWEB.Controllers
 
         // Post: Future_Appointment
         [HttpPost]
-        [Route("api/Future_Appointment/AllFuture_AppointmentForClient")]
-        public HttpResponseMessage GetAllFuture_AppointmentForClient([FromBody] string Client_ID_numberr)
+        [Route("api/Future_Appointment/AllFuture_AppointmentForClient/{Client_ID_numberr}")]
+        public HttpResponseMessage GetAllFuture_AppointmentForClient(string Client_ID_numberr)
         {
  
             List<Future_AppointmentDTO> AllFuture_Appointment = db.Future_Appointment.Where(a => a.Client_ID_number == Client_ID_numberr).Select(x => new Future_AppointmentDTO
@@ -69,6 +69,30 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
+
+        // Post: Future_Appointment  מחזיר את כל התורים הקבועים לבעל העסק
+        [HttpPost]
+        [Route("api/Future_Appointment/AllFuture_AppointmentForProfessional/{Business_Numberr}")]
+        public HttpResponseMessage GetAllFuture_AppointmentForProfessional(int Business_Numberr)
+        {
+
+            List<Future_AppointmentDTO> AllFuture_Appointment = db.Future_Appointment.Include(a => a.Appointment)
+                                                                                    .Where(a => a.Appointment.Business_Number == Business_Numberr).Select(x => new Future_AppointmentDTO
+            {
+                Future_appointment_number = x.Future_appointment_number,
+                AddressStreet = x.AddressStreet,
+                AddressHouseNumber = x.AddressHouseNumber,
+                AddressCity = x.AddressCity,
+                Appointment_status = x.Appointment_status,
+                Client_ID_number = x.Client_ID_number,
+                Type_treatment_Number = x.Type_treatment_Number,
+                Number_appointment = x.Number_appointment
+            }).ToList();
+            if (AllFuture_Appointment != null)
+                return Request.CreateResponse(HttpStatusCode.OK, AllFuture_Appointment);
+            else
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
 
 
         // Post: api/Post

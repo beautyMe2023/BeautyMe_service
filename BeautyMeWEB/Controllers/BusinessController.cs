@@ -38,10 +38,10 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-        // Post: api/Business/OneBusiness פונקציה שמקבלת מספר תור ומחזירה את התור הספציפי
+        // Post: api/Business/OneBusiness פונקציה שמקבלת מספר עסק ומחזירה את העסק הספציפי
         [HttpPost]
-        [Route("api/Business/OneBusiness")]
-        public HttpResponseMessage GetOneBusiness([FromBody] int business_num)
+        [Route("api/Business/OneBusiness/{business_num}")]
+        public HttpResponseMessage GetOneBusiness(int business_num)
         {
             BusinessDTO oneBusiness = db.Businesses.Where(a => a.Business_Number == business_num).Select(x => new BusinessDTO
             {
