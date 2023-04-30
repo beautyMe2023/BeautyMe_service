@@ -18,5 +18,6 @@ namespace BeautyMeWEB.DTO
         public string AddressHouseNumber;
         public string AddressCity;
         public string password;
+        public int Business_Number;
     }
 }

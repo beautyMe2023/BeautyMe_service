@@ -44,8 +44,8 @@ namespace BeautyMeWEB.Controllers
 
         // Post: Appointment
         [HttpPost]
-        [Route("api/Appointment/AllAppointmentForBussines")]
-        public HttpResponseMessage GetAllAppointmentForBussines([FromBody] int Business_Numberr)
+        [Route("api/Appointment/AllAppointmentForBussines/{Business_Numberr}")]
+        public HttpResponseMessage GetAllAppointmentForBussines(int Business_Numberr)
         {
             List<AppointmentDTO> AllAppointment = db.Appointments.Where(a => a.Business_Number == Business_Numberr).Select(x => new AppointmentDTO
             {

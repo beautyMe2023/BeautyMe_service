@@ -36,10 +36,11 @@ namespace BeautyMeWEB.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
-        // Post: api/Business_can_give_treatmentController/All_the_treatments_bussines_can_give   //Post ספציפי...מחזיר את כל הטיפולים שיש לעסק מסויים
+
+        // Post: api/Business_can_give_treatmentController/All_the_treatments_bussines_can_give/{Business_Numberr}   //Post ספציפי...מחזיר את כל הטיפולים שיש לעסק מסויים
         [HttpPost]
-        [Route("api/Business_can_give_treatmentController/All_the_treatments_appointment_can_give")]
-        public HttpResponseMessage GetAll_the_treatments_businnes_can_give([FromBody] int Business_Numberr)
+        [Route("api/Business_can_give_treatmentController/All_the_treatments_appointment_can_give/{Business_Numberr}")]
+        public HttpResponseMessage GetAll_the_treatments_businnes_can_give(int Business_Numberr)
         {
  
             List<Business_can_give_treatmentDTO> all_the_treatments_businnes_can_give = db.Business_can_give_treatment.Where(a => a.Business_Number == Business_Numberr).Select(x => new Business_can_give_treatmentDTO

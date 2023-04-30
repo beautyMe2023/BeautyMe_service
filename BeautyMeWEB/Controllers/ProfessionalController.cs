@@ -41,7 +41,6 @@ namespace BeautyMeWEB.Controllers
             else
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
-
         // Post: api/Professional/OneProfessional פונקציה שמקבלת ת.ז וסיסמה ומחזירה את המשתמש
         [HttpPost]
         [Route("api/Professional/OneProfessional")]
@@ -62,14 +61,25 @@ namespace BeautyMeWEB.Controllers
                 password = x.password
             }).FirstOrDefault();
             if (oneProfessional != null)
+            {
+                BusinessDTO number = db.Businesses.Where(x => x.Professional_ID_number == v.id_number).Select(y => new BusinessDTO
+                {
+                    Business_Number = y.Business_Number
+                }
+                    ).FirstOrDefault();
+                oneProfessional.Business_Number = number.Business_Number;
+
                 return Request.CreateResponse(HttpStatusCode.OK, oneProfessional);
+
+            }
+
             else
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
         //
         //
         //
-        
+
         //[HttpPost]
         //[Route("api/Professional/GetProfessional")]
         //public IHttpActionResult GetProfessional([FromBody] ProfessionalDTO user)
